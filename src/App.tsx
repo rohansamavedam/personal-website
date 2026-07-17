@@ -9,6 +9,7 @@ import {
   Code2,
   Database,
   ExternalLink,
+  Github,
   GraduationCap,
   Layers3,
   Linkedin,
@@ -90,7 +91,14 @@ function Navbar() {
           <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)}>{link}</a>
         ))}
       </div>
-      <a className="pill-button nav-cta" href="#contact">Let’s connect <ArrowUpRight size={15} /></a>
+      <div className="nav-socials" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/rohansamavedam/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <Linkedin size={19} />
+        </a>
+        <a href="https://github.com/rohansamavedam" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <Github size={19} />
+        </a>
+      </div>
       <button className="mobile-menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
         {open ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -115,23 +123,22 @@ function Hero() {
   return (
     <section id="top" className="hero section-shell">
       <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="hero-kicker">
-        <span className="status-dot" /> Brooklyn, New York · Open to meaningful work
+        <span className="status-dot" /> Brooklyn, New York · Open to work
       </motion.div>
       <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }}>
-        I build systems<br />that make complexity
-        <span className="animate-shiny" style={gradientStyle}> feel simple.</span>
+        I build software<br />for decisions that<br />
+        <span className="animate-shiny" style={gradientStyle}>matter in the real world.</span>
       </motion.h1>
       <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55 }} className="hero-bottom">
-        <p>I’m <strong>Rohan Samavedam</strong>, a software engineer and analytics graduate student with experience building production systems at Amazon and One Medical.</p>
+        <p>I’m <strong>Rohan Samavedam</strong>, a software engineer and business analytics graduate student. I build production systems that turn complex data and operational problems into clear, dependable products.</p>
         <div className="hero-actions">
           <a href="#projects" className="pill-button">Explore my work <ArrowDown size={15} /></a>
-          <a href="https://www.linkedin.com/in/rohansamavedam" target="_blank" rel="noreferrer" className="text-link">LinkedIn <ArrowUpRight size={14} /></a>
         </div>
       </motion.div>
       <div className="hero-metrics">
         <div><strong>5+</strong><span>Years across software, data & education</span></div>
         <div><strong>3</strong><span>Domains: commerce, healthcare & operations</span></div>
-        <div><strong>01</strong><span>Goal: technology that earns trust</span></div>
+        <div><strong>Now</strong><span>Learning AI systems, job hunting & analyzing interesting products</span></div>
       </div>
     </section>
   );
@@ -144,9 +151,11 @@ function About() {
       <div className="about-grid">
         <div className="portrait-card glass-card"><div className="monogram">RS</div><span>Software · Data · Product</span></div>
         <div className="about-copy">
-          <p className="lead">I care about the seam between a difficult technical problem and an experience that feels effortless.</p>
-          <p>My background spans software engineering, data systems, healthcare technology, cloud infrastructure, and teaching. Today, I’m expanding that foundation through graduate study in business analytics at Baruch College.</p>
-          <p>I bring an operator’s eye to engineering: understand the real constraint, build the smallest durable solution, measure what matters, and leave the system clearer than I found it.</p>
+          <h3>Professional motivation</h3>
+          <p className="lead">I’m drawn to problems where software affects how people and organizations operate in the real world.</p>
+          <p>My experience spans fulfillment operations, consumer products, and healthcare—environments where reliable systems, good data, and sound decisions matter.</p>
+          <h3>Personal operating philosophy</h3>
+          <p>Outside engineering, I’m a student of meditation, yoga, psychology, and philosophy. Those practices shape how I work: staying composed under pressure, communicating with honesty and tact, and thinking clearly when the problem is ambiguous.</p>
           <div className="education-row"><GraduationCap size={20} /><div><strong>M.S., Business Analytics</strong><span>Baruch College · 2025—2026</span></div></div>
           <div className="education-row"><GraduationCap size={20} /><div><strong>Bachelor’s Degree</strong><span>San José State University</span></div></div>
         </div>
@@ -226,7 +235,7 @@ export default function App() {
   return (
     <div className="site">
       <div className="video-bg"><video autoPlay loop muted playsInline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4" /></div>
-      <div className="bg-overlay"/><div className="rail rail-left"/><div className="rail rail-right"/>
+      <div className="bg-overlay"/><div className="rail rail-left"/>
       <svg width="0" height="0" aria-hidden="true"><filter id="c3-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0"/><feComposite in2="SourceGraphic" operator="in" result="noise"/><feBlend in="SourceGraphic" in2="noise" mode="multiply"/></filter></svg>
       <div className="page-content"><Navbar/><Hero/><About/><Experience/><Projects/><Skills/><Certifications/><Contact/></div>
     </div>
