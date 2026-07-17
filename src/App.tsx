@@ -30,40 +30,46 @@ const gradientStyle = {
   filter: 'url(#c3-noise)',
 };
 
-const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials', 'Contact'];
+const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials', 'Skills', 'Contact'];
 
 const experience = [
-  {
-    period: '2025 — Present',
-    role: 'Teaching Assistant',
-    company: 'Baruch College',
-    location: 'New York, NY',
-    copy: 'Supporting students at the intersection of programming, analytics, and business—translating technical ideas into practical understanding.',
-    tags: ['Teaching', 'Analytics', 'Mentorship'],
-  },
   {
     period: '2023 — 2024',
     role: 'Software Engineer',
     company: 'One Medical',
     location: 'San Francisco, CA',
-    copy: 'Built and improved production software in a healthcare environment where reliability, thoughtful engineering, and user trust matter.',
-    tags: ['Production systems', 'Healthcare', 'Engineering'],
+    copy: 'Collaborated with a cross-functional team of 8 to engineer and deploy a high-visibility integration between One Medical and Amazon.com, launching 14-day trial memberships using Angular, TypeScript, Ruby on Rails, and AWS, which increased trial conversions by 15 percent.',
+    details: [
+      'Led a complete overhaul of the enterprise registration flow, partnering with design and product teams to implement strategic UX improvements that boosted conversion rates by 50 percent.',
+      'Engineered and executed custom Rake scripts in Ruby to backfill membership event data, reconciling discrepancies across 10,000+ patient records and improving the accuracy of end-of-year reports.',
+      'Supported enterprise client onboarding by configuring secure SFTP/SSH pipelines for whitelisting users and automating access validation.',
+    ],
+    tags: ['Angular', 'TypeScript', 'Ruby on Rails', 'AWS', 'Rake', 'SFTP / SSH'],
   },
   {
     period: '2021 — 2023',
     role: 'Software & Data Engineer',
     company: 'Amazon',
     location: 'Seattle, WA',
-    copy: 'Worked across software engineering and data engineering for large-scale operational systems, including Fulfillment Technologies & Robotics.',
-    tags: ['AWS', 'Data systems', 'Scale'],
+    copy: 'Designed and maintained large-scale ETL pipelines to ingest, clean, and transform fulfillment-center data, ensuring accurate integration with Amazon QuickSight dashboards.',
+    details: [
+      'Implemented a near real-time Blended Container alert system using SQL, AWS Glue, and PySpark, saving approximately $15 per package and identifying over 6,000 packages in 2021.',
+      'Partnered with design, product, and marketing teams on feature requests, bug fixes, and accessibility initiatives, improving the customer experience for millions of Goodreads users.',
+      'Resolved a long-standing Google Ads bug on Goodreads, restoring ad delivery and reactivating revenue after eight months of inactivity.',
+      'Migrated legacy Ruby on Rails APIs to Next.js and GraphQL, improving system scalability, performance, and maintainability.',
+    ],
+    tags: ['ETL', 'QuickSight', 'SQL', 'AWS Glue', 'PySpark', 'Ruby on Rails', 'Next.js', 'GraphQL'],
   },
   {
     period: '2020',
     role: 'Software Engineer Intern',
     company: 'Amazon',
     location: 'Seattle, WA',
-    copy: 'Delivered software in a fast-moving engineering organization and developed the foundations for building dependable products at scale.',
-    tags: ['Software engineering', 'Collaboration'],
+    copy: 'Developed a React-based authentication redirect component in collaboration with the Federated Identity Team, handling OAuth 2.0 flows and dynamic identity provider routing.',
+    details: [
+      'Built and tested backend serverless microservices using AWS Lambda, API Gateway, Spring, and DynamoDB.',
+    ],
+    tags: ['React', 'OAuth 2.0', 'AWS Lambda', 'API Gateway', 'Spring', 'DynamoDB'],
   },
 ];
 
@@ -164,7 +170,6 @@ function About() {
 
 function Education() {
   const [showTeachingDetails, setShowTeachingDetails] = useState(false);
-  const [showSjsuDetails, setShowSjsuDetails] = useState(false);
 
   return (
     <section id="education" className="section-shell content-section">
@@ -209,13 +214,10 @@ function Education() {
               {['Data Structures & Algorithms', 'Computer Architecture', 'Discrete Mathematics & Probability', 'Linear Algebra', 'Calculus I–III', 'Physics I–II', 'Object-Oriented Design', 'Operating Systems', 'Principles of Database Management Systems', 'Computer Networks', 'Machine Learning', 'Information Security', 'Server-Side Programming'].map(course => <li key={course}>{course}</li>)}
             </ul>
           </div>
-          {showSjsuDetails && <div className="education-meta-grid">
+          <div className="education-meta-grid">
             <div className="education-block"><h4>Honor</h4><p>Dean’s Scholar</p></div>
             <div className="education-block"><h4>Activities & societies</h4><p>The Software and Computer Engineering Society</p></div>
-          </div>}
-          <button className="activity-toggle education-meta-toggle" type="button" onClick={() => setShowSjsuDetails(!showSjsuDetails)} aria-expanded={showSjsuDetails}>
-            {showSjsuDetails ? 'Show less' : 'Show more'}
-          </button>
+          </div>
         </article>
       </div>
     </section>
@@ -223,17 +225,38 @@ function Education() {
 }
 
 function Experience() {
+  const [expandedRoles, setExpandedRoles] = useState<Set<string>>(new Set());
+  const highlightMetrics = (text: string) => text.split(/(15 percent|50 percent|10,000\+ patient records|\$15 per package|over 6,000 packages|millions of Goodreads users|eight months of inactivity)/gi).map((part, index) =>
+    /^(15 percent|50 percent|10,000\+ patient records|\$15 per package|over 6,000 packages|millions of Goodreads users|eight months of inactivity)$/i.test(part) ? <strong key={index} className="outcome-metric">{part}</strong> : part
+  );
+  const toggleRole = (key: string) => setExpandedRoles(current => {
+    const next = new Set(current);
+    next.has(key) ? next.delete(key) : next.add(key);
+    return next;
+  });
+
   return (
     <section id="experience" className="section-shell content-section">
-      <SectionHeading number="03" eyebrow="Experience" title="Built in environments where the details matter." copy="A path through large-scale systems, healthcare products, data engineering, and education." />
+      <SectionHeading number="03" eyebrow="Experience" title="Software built for complex operations." />
       <div className="timeline">
-        {experience.map((item, i) => (
-          <motion.article key={item.role + item.company} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .06 }} className="experience-row">
+        {experience.map((item, i) => {
+          const roleKey = item.role + item.company;
+          const isExpanded = expandedRoles.has(roleKey);
+          return <motion.article key={roleKey} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .06 }} className="experience-row">
             <span className="period">{item.period}</span>
             <div className="role"><h3>{item.role}</h3><p>{item.company} · {item.location}</p></div>
-            <div className="experience-copy"><p>{item.copy}</p><div className="tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
-          </motion.article>
-        ))}
+            <div className="experience-copy">
+              <p>{highlightMetrics(item.copy)}</p>
+              {item.details && <>
+                {isExpanded && <div className="experience-details">{item.details.map(point => <p key={point}>{highlightMetrics(point)}</p>)}</div>}
+                <button className="activity-toggle" type="button" onClick={() => toggleRole(roleKey)} aria-expanded={isExpanded}>
+                  {isExpanded ? 'Show less' : 'Show more'}
+                </button>
+              </>}
+              <div className="tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+            </div>
+          </motion.article>;
+        })}
       </div>
     </section>
   );
@@ -259,7 +282,7 @@ function Projects() {
 function Skills() {
   return (
     <section id="skills" className="section-shell content-section">
-      <SectionHeading number="05" eyebrow="Skills" title="A toolkit for building the whole thing." />
+      <SectionHeading number="06" eyebrow="Skills" title="A toolkit for building the whole thing." />
       <div className="skills-grid">{skills.map(({ icon: Icon, title, items }) => <article key={title} className="skill-card glass-card"><Icon/><h3>{title}</h3><ul>{items.map(item => <li key={item}><Check size={14}/>{item}</li>)}</ul></article>)}</div>
     </section>
   );
@@ -268,7 +291,7 @@ function Skills() {
 function Credentials() {
   return (
     <section id="credentials" className="section-shell content-section">
-      <SectionHeading number="06" eyebrow="Credentials" title="Always learning, always sharpening the craft." />
+      <SectionHeading number="05" eyebrow="Credentials" title="Always learning, always sharpening the craft." />
       <div className="credential-card glass-card">
         <Award size={34}/><div><span>Certifications & continuing education</span><h3>Cloud, analytics, and modern software delivery</h3><p>Formal certification details are being curated for this portfolio. Current graduate coursework includes data mining, quantitative modeling, web analytics, statistics, and software tools for data analysis.</p></div>
         <div className="credential-badge">In progress</div>
@@ -295,7 +318,7 @@ export default function App() {
       <div className="video-bg"><video autoPlay loop muted playsInline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4" /></div>
       <div className="bg-overlay"/><div className="rail rail-left"/>
       <svg width="0" height="0" aria-hidden="true"><filter id="c3-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0"/><feComposite in2="SourceGraphic" operator="in" result="noise"/><feBlend in="SourceGraphic" in2="noise" mode="multiply"/></filter></svg>
-      <div className="page-content"><Navbar/><Hero/><About/><Education/><Experience/><Projects/><Skills/><Credentials/><Contact/></div>
+      <div className="page-content"><Navbar/><Hero/><About/><Education/><Experience/><Projects/><Credentials/><Skills/><Contact/></div>
     </div>
   );
 }
