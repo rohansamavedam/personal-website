@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   Award,
   BriefcaseBusiness,
-  Check,
   Code2,
   Database,
   ExternalLink,
@@ -133,9 +132,56 @@ const experience = [
 ];
 
 const skills = [
-  { icon: Code2, title: 'Product Engineering', items: ['TypeScript', 'React & Next.js', 'APIs', 'Full-stack systems'] },
-  { icon: Database, title: 'Cloud & Data', items: ['AWS', 'Lambda', 'DynamoDB', 'S3', 'Data pipelines'] },
-  { icon: Layers3, title: 'Delivery', items: ['Serverless architecture', 'Stripe', 'Cognito', 'Analytics', 'AI-assisted workflows'] },
+  {
+    icon: Code2,
+    title: 'Product Development',
+    groups: [
+      { label: 'Languages', items: ['TypeScript', 'JavaScript', 'Python', 'Ruby', 'Java', 'SQL'] },
+      { label: 'Frontend', items: ['React', 'Next.js', 'Angular', 'HTML', 'CSS', 'Tailwind CSS'] },
+      { label: 'Backend & APIs', items: ['Ruby on Rails', 'Spring', 'Node.js', 'REST APIs', 'GraphQL'] },
+      { label: 'Foundations', items: ['Data structures', 'Algorithms', 'OOP', 'System design', 'OAuth 2.0'] },
+    ],
+  },
+  {
+    icon: Sparkles,
+    title: 'Applied AI & Agentic Systems',
+    groups: [
+      { label: 'Generative AI', items: ['LLMs', 'Prompt engineering & management', 'Model fine-tuning', 'Structured outputs'] },
+      { label: 'Agentic Systems', items: ['AI agents', 'Tool calling', 'Multi-agent orchestration'] },
+      { label: 'Retrieval & Reliability', items: ['RAG', 'Embeddings', 'Vector search', 'LLM evaluations', 'Guardrails', 'AI observability'] },
+      { label: 'Platforms & Tools', items: ['Amazon Bedrock', 'Amazon Bedrock AgentCore', 'ChatGPT', 'Codex', 'Claude Code'] },
+    ],
+  },
+  {
+    icon: Database,
+    title: 'Cloud & Data',
+    groups: [
+      { label: 'Compute, Applications & APIs', items: ['Lambda', 'EC2', 'API Gateway', 'AppSync', 'Amplify', 'Cognito'] },
+      { label: 'Infrastructure & Integration', items: ['SQS', 'SES', 'CloudFront', 'Route 53', 'VPC', 'IAM', 'CloudWatch'] },
+      { label: 'Data Engineering', items: ['S3', 'AWS Glue', 'ETL pipelines', 'PySpark', 'Data transformation', 'Data quality'] },
+      { label: 'Databases & Warehousing', items: ['DynamoDB', 'Snowflake', 'MySQL', 'Relational databases', 'NoSQL', 'ER and database modeling'] },
+    ],
+  },
+  {
+    icon: Layers3,
+    title: 'Architecture & Delivery',
+    groups: [
+      { label: 'System Architecture', items: ['Serverless architecture', 'Scalable systems', 'Distributed systems', 'Event-driven architecture', 'API design'] },
+      { label: 'Infrastructure & Deployment', items: ['Terraform', 'Docker', 'Kubernetes', 'CI/CD', 'Infrastructure as code', 'Git'] },
+      { label: 'Quality & Reliability', items: ['Automated testing', 'Debugging', 'Observability', 'Logging and monitoring', 'Performance optimization'] },
+      { label: 'Integrations & Operations', items: ['Stripe', 'SFTP / SSH', 'Third-party integrations', 'Production support'] },
+    ],
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: 'Product & Business Analysis',
+    groups: [
+      { label: 'Product Analytics', items: ['GA4', 'Mixpanel', 'KPI development', 'A/B testing', 'Funnel and conversion analysis'] },
+      { label: 'Business Intelligence', items: ['Tableau', 'Power BI', 'QuickSight', 'Excel', 'Dashboard development', 'Data visualization'] },
+      { label: 'Business & Decision Analysis', items: ['Requirements analysis', 'Process improvement', 'Quantitative modeling', 'Statistical analysis', 'Data-driven decision-making'] },
+      { label: 'Product Collaboration', items: ['Figma', 'Agile delivery', 'Stakeholder communication', 'Cross-functional collaboration', 'Technical documentation'] },
+    ],
+  },
 ];
 
 function Mark() {
@@ -341,8 +387,26 @@ function Projects() {
 function Skills() {
   return (
     <section id="skills" className="section-shell content-section">
-      <SectionHeading number="06" eyebrow="Skills" title="A toolkit for building the whole thing." />
-      <div className="skills-grid">{skills.map(({ icon: Icon, title, items }) => <article key={title} className="skill-card glass-card"><Icon/><h3>{title}</h3><ul>{items.map(item => <li key={item}><Check size={14}/>{item}</li>)}</ul></article>)}</div>
+      <SectionHeading number="06" eyebrow="Skills" title="A toolkit for building the whole thing." copy="From defining the problem to shipping and measuring the solution, I work across engineering, AI, cloud, and product analytics." />
+      <div className="skills-grid">
+        {skills.map(({ icon: Icon, title, groups }, index) => (
+          <article key={title} className="skill-row">
+            <div className="skill-row-heading">
+              <span className="skill-number">{String(index + 1).padStart(2, '0')}</span>
+              <Icon size={22}/>
+              <h3>{title}</h3>
+            </div>
+            <div className="skill-groups">
+              {groups.map(({ label, items }) => (
+                <div className="skill-group" key={label}>
+                  <h4>{label}</h4>
+                  <p>{items.join(' · ')}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
