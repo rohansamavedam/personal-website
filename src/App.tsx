@@ -264,7 +264,7 @@ function About() {
         <div className="portrait-card glass-card"><img src="/images/rohan-profile.png" alt="Rohan Samavedam" /></div>
         <div className="about-copy">
           <h3>Professional motivation</h3>
-          <p>I’m drawn to problems where software affects how people and organizations operate in the real world. My experience spans fulfillment operations, consumer products, and healthcare—environments where reliable systems, good data, and sound decisions matter.</p>
+          <p>I’m interested in building software that shapes how people and organizations operate. My experience spans fulfillment, consumer products, and healthcare, where reliable systems, trustworthy data, and thoughtful decisions are essential.</p>
           <h3>Personal operating philosophy</h3>
           <p>Outside engineering, I’m a student of meditation, yoga, psychology, and philosophy. Those practices shape how I work: staying composed under pressure, communicating with honesty and tact, and thinking clearly when the problem is ambiguous.</p>
         </div>
