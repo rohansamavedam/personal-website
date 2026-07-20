@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -31,6 +31,65 @@ const gradientStyle = {
 };
 
 const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials', 'Skills', 'Contact'];
+
+const backgroundVideo = '/background.mp4';
+
+function BackgroundVideo() {
+  const videos = useRef<Array<HTMLVideoElement | null>>([]);
+  const activeVideo = useRef(0);
+  const isTransitioning = useRef(false);
+  const [visibleVideo, setVisibleVideo] = useState(0);
+
+  const crossfade = (from: number) => {
+    if (from !== activeVideo.current || isTransitioning.current) return;
+
+    const to = from === 0 ? 1 : 0;
+    const outgoing = videos.current[from];
+    const incoming = videos.current[to];
+    if (!outgoing || !incoming) return;
+
+    isTransitioning.current = true;
+    incoming.currentTime = 0;
+    void incoming.play().then(() => {
+      activeVideo.current = to;
+      setVisibleVideo(to);
+
+      window.setTimeout(() => {
+        outgoing.pause();
+        outgoing.currentTime = 0;
+        isTransitioning.current = false;
+      }, 1400);
+    }).catch(() => {
+      isTransitioning.current = false;
+    });
+  };
+
+  const handleTimeUpdate = (index: number) => {
+    const video = videos.current[index];
+    if (video && Number.isFinite(video.duration) && video.duration - video.currentTime <= 1.5) {
+      crossfade(index);
+    }
+  };
+
+  return (
+    <div className="video-bg" aria-hidden="true">
+      {[0, 1].map((index) => (
+        <video
+          key={index}
+          ref={(element) => { videos.current[index] = element; }}
+          className={visibleVideo === index ? 'is-visible' : ''}
+          autoPlay={index === 0}
+          muted
+          playsInline
+          preload="auto"
+          src={backgroundVideo}
+          onTimeUpdate={() => handleTimeUpdate(index)}
+          onEnded={() => crossfade(index)}
+        />
+      ))}
+    </div>
+  );
+}
 
 const experience = [
   {
@@ -139,6 +198,7 @@ function Hero() {
         <p>I’m <strong>Rohan Samavedam</strong>, a software engineer and business analytics graduate student. I build production systems that turn complex data and operational problems into clear, dependable products.</p>
         <div className="hero-actions">
           <a href="#experience" className="pill-button">Explore my work <ArrowDown size={15} /></a>
+          <a href="#contact" className="pill-button pill-button-outline">Get in touch</a>
         </div>
       </motion.div>
       <div className="hero-metrics">
@@ -303,9 +363,9 @@ function Contact() {
   return (
     <section id="contact" className="section-shell contact-section">
       <Eyebrow>Contact</Eyebrow>
-      <h2>Have a hard problem<br/>worth solving?</h2>
-      <p>Whether it’s a product, a system, or an idea that needs shape—let’s start a conversation.</p>
-      <div className="contact-actions"><a className="pill-button" href="https://www.linkedin.com/in/rohansamavedam" target="_blank" rel="noreferrer"><Linkedin size={17}/> Connect on LinkedIn</a><a className="text-link" href="https://www.linkedin.com/in/rohansamavedam" target="_blank" rel="noreferrer"><Mail size={15}/> Send a message</a></div>
+      <h2>Let’s connect.</h2>
+      <p>Whether you have an opportunity, a project, or an idea worth exploring, let’s talk.</p>
+      <div className="contact-actions"><a className="pill-button" href="https://www.linkedin.com/in/rohansamavedam" target="_blank" rel="noreferrer"><Linkedin size={17}/> Connect on LinkedIn</a><a className="text-link" href="mailto:rohansamavedam@gmail.com"><Mail size={15}/> rohansamavedam@gmail.com</a></div>
       <footer><Mark/><span>© {new Date().getFullYear()} Rohan Samavedam</span><a href="#top">Back to top <ArrowUpRight size={13}/></a></footer>
     </section>
   );
@@ -314,7 +374,7 @@ function Contact() {
 export default function App() {
   return (
     <div className="site">
-      <div className="video-bg"><video autoPlay loop muted playsInline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4" /></div>
+      <BackgroundVideo/>
       <div className="bg-overlay"/><div className="rail rail-left"/>
       <svg width="0" height="0" aria-hidden="true"><filter id="c3-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0"/><feComposite in2="SourceGraphic" operator="in" result="noise"/><feBlend in="SourceGraphic" in2="noise" mode="multiply"/></filter></svg>
       <div className="page-content"><Navbar/><Hero/><About/><Education/><Experience/><Projects/><Credentials/><Skills/><Contact/></div>
