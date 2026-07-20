@@ -372,15 +372,66 @@ function Experience() {
 function Projects() {
   return (
     <section id="projects" className="section-shell content-section">
-      <SectionHeading number="04" eyebrow="Selected work" title="From idea to shipped product." copy="A featured independent build, plus a glimpse at the kinds of systems I’ve worked on professionally." />
+      <SectionHeading number="04" eyebrow="Projects" title="Built to explore real problems." copy="Independent work across responsible AI, creator platforms, mobile development, data systems, and applied analytics." />
       <div className="projects-grid">
-        <article className="project-feature glass-card">
-          <div className="project-top"><span>Featured project · 2025</span><ExternalLink size={18} /></div>
-          <div className="project-visual"><div className="browser-bar"><i/><i/><i/></div><div className="visual-copy"><Sparkles size={22}/><strong>Shivakailash.com</strong><span>Content, commerce & community—one serverless platform.</span></div></div>
-          <div className="project-details"><div><h3>Creator platform, built end to end.</h3><p>Led full-cycle development of a serverless web application with digital product sales, private video delivery, payments, scheduling, 2FA dashboards, and analytics-informed flows.</p></div><div className="tags"><span>Next.js</span><span>TypeScript</span><span>AWS</span><span>Stripe</span><span>GA4</span></div></div>
+        <article className="project-feature project-link glass-card">
+          <a className="project-card-primary" href="https://examination-ai.netlify.app/" target="_blank" rel="noreferrer" aria-label="Visit the Examination AI live site" />
+          <div className="project-top"><span>Open-source product · Jul 2026</span><span className="project-status">In progress</span></div>
+          <div className="project-feature-intro">
+            <h3>Examination AI</h3>
+            <p>Responsible AI assistance for university exams, controlled by professors.</p>
+          </div>
+          <div className="project-details"><div><h3>A controlled middle ground for AI-assisted assessment.</h3><p>Designed and built a product concept and case study where professors configure question-level AI access, prompt budgets, and guidance-only guardrails. The experience gives students limited learning support while logging interactions for transparent review and assessment analytics.</p></div><div className="tags"><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>LLMs</span><span>Prompt Engineering</span><span>AI Guardrails</span><span>Responsible AI</span><span>Product Analytics</span></div></div>
+          <div className="project-feature-footer project-actions">
+            <a href="https://examination-ai.netlify.app/" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a>
+            <a href="https://github.com/rohansamavedam/examination-ai" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
+          </div>
         </article>
-        <article className="project-mini glass-card"><BriefcaseBusiness/><span>Professional systems</span><h3>Production software at scale</h3><p>Engineering work across Amazon and One Medical, shaped by operational complexity, reliability, and customer trust.</p><div className="mini-footer">Enterprise experience <ArrowUpRight size={15}/></div></article>
-        <article className="project-mini glass-card"><Database/><span>Data & analytics</span><h3>Decisions backed by signal</h3><p>Data engineering foundations paired with graduate work in analytics, modeling, data mining, and web intelligence.</p><div className="mini-footer">Business + technology <ArrowUpRight size={15}/></div></article>
+        <article className="project-feature project-link glass-card">
+          <a className="project-card-primary" href="https://shivakailash.com" target="_blank" rel="noreferrer" aria-label="Visit Shivakailash.com" />
+          <div className="project-top"><span>Freelance project · Jan 2025—Jan 2026</span></div>
+          <div className="project-feature-intro">
+            <h3>Shivakailash.com</h3>
+            <p>Products, courses, and events for a creator with 20K YouTube subscribers.</p>
+          </div>
+          <div className="project-details"><div><h3>A secure creator business, built end to end.</h3><p>Led full-cycle development of a serverless commerce and learning platform with digital product sales, Stripe payments, Cal.com scheduling, 2FA dashboards, and GA4-informed user flows. Protected paid course content through authenticated sessions, role-based permissions, and time-limited media URLs.</p></div><div className="tags"><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>AWS</span><span>Stripe</span><span>GA4</span></div></div>
+          <div className="project-feature-footer project-actions"><a href="https://shivakailash.com" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a></div>
+        </article>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer" aria-label="View the TravSafe project on GitHub" />
+          <span>Mobile app · 2021</span>
+          <h3>TravSafe</h3>
+          <p>A React Native travel-safety app that brings destination advisories, COVID-19 trends, weather, local news, and search history into one mobile experience.</p>
+          <div className="tags"><span>React Native</span><span>Expo</span><span>AWS Amplify</span><span>REST APIs</span></div>
+          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
+        </article>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/CIS-9340-TERM-PROJECT" target="_blank" rel="noreferrer" aria-label="View the MySQL Property Management Database System project on GitHub" />
+          <span>Database system · 2025</span>
+          <h3>Property Management Database</h3>
+          <p>A normalized MySQL system modeling listings, rentals, contracts, inspections, vendors, tenants, customers, and payments—with a Retool prototype for role-based CRUD workflows.</p>
+          <div className="tags"><span>MySQL</span><span>Workbench</span><span>ER Modeling</span><span>Retool</span></div>
+          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9340-TERM-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
+        </article>
+        <article className="project-mini project-link project-mini-wide glass-card">
+          <a className="project-card-primary" href="https://rohansamavedam.github.io/STA9750-2025-FALL/" target="_blank" rel="noreferrer" aria-label="View the R and Quarto Data Analytics portfolio live site" />
+          <span>Analytics portfolio · 2025</span>
+          <h3>R / Quarto Data Analytics</h3>
+          <p>Five reproducible analyses spanning mental health, Netflix trends, housing affordability, NYC tree canopy, and BLS jobs revisions—published from Quarto reports with R.</p>
+          <div className="tags"><span>R</span><span>Quarto</span><span>tidyverse</span><span>ggplot2</span><span>GitHub Pages</span></div>
+          <div className="mini-footer project-actions">
+            <a href="https://rohansamavedam.github.io/STA9750-2025-FALL/" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a>
+            <a href="https://github.com/rohansamavedam/STA9750-2025-FALL" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
+          </div>
+        </article>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer" aria-label="View the NYC Motor Vehicle Collision Fatality Analysis project on GitHub" />
+          <span>Data mining · 2025</span>
+          <h3>NYC Collision Fatality Analysis</h3>
+          <p>A Python data-mining study using feature engineering and logistic regression to test whether Ford vehicles were associated with higher fatal-crash odds in NYC collision records.</p>
+          <div className="tags"><span>Python</span><span>Pandas</span><span>scikit-learn</span><span>statsmodels</span><span>Logistic Regression</span></div>
+          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
+        </article>
       </div>
     </section>
   );
