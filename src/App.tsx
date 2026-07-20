@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -33,61 +33,19 @@ const gradientStyle = {
 
 const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials', 'Skills', 'Contact'];
 
-const backgroundVideo = '/background.mp4';
+const backgroundVideo = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4';
 
 function BackgroundVideo() {
-  const videos = useRef<Array<HTMLVideoElement | null>>([]);
-  const activeVideo = useRef(0);
-  const isTransitioning = useRef(false);
-  const [visibleVideo, setVisibleVideo] = useState(0);
-
-  const crossfade = (from: number) => {
-    if (from !== activeVideo.current || isTransitioning.current) return;
-
-    const to = from === 0 ? 1 : 0;
-    const outgoing = videos.current[from];
-    const incoming = videos.current[to];
-    if (!outgoing || !incoming) return;
-
-    isTransitioning.current = true;
-    incoming.currentTime = 0;
-    void incoming.play().then(() => {
-      activeVideo.current = to;
-      setVisibleVideo(to);
-
-      window.setTimeout(() => {
-        outgoing.pause();
-        outgoing.currentTime = 0;
-        isTransitioning.current = false;
-      }, 1400);
-    }).catch(() => {
-      isTransitioning.current = false;
-    });
-  };
-
-  const handleTimeUpdate = (index: number) => {
-    const video = videos.current[index];
-    if (video && Number.isFinite(video.duration) && video.duration - video.currentTime <= 1.5) {
-      crossfade(index);
-    }
-  };
-
   return (
     <div className="video-bg" aria-hidden="true">
-      {[0, 1].map((index) => (
-        <video
-          key={index}
-          ref={(element) => { videos.current[index] = element; }}
-          className={visibleVideo === index ? 'is-visible' : ''}
-          autoPlay={index === 0}
-          muted
-          playsInline
-          preload="auto"
-          src={backgroundVideo}
-          onTimeUpdate={() => handleTimeUpdate(index)}
-          onEnded={() => crossfade(index)}
-        />
-      ))}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        src={backgroundVideo}
+      />
     </div>
   );
 }
@@ -263,7 +221,7 @@ function About() {
     <section id="about" className="section-shell content-section">
       <SectionHeading number="01" eyebrow="About" title="Engineer by practice. Problem-solver by nature." />
       <div className="about-grid">
-        <div className="portrait-card glass-card"><img src="/images/rohan-profile.png" alt="Rohan Samavedam" /></div>
+        <div className="portrait-card glass-card"><img src="/images/rohan-profile.png" alt="Rohan Samavedam" loading="lazy" decoding="async" /></div>
         <div className="about-copy">
           <h3>Professional motivation</h3>
           <p>I’m interested in building software that shapes how people and organizations operate. My experience spans fulfillment, consumer products, and healthcare, where reliable systems, trustworthy data, and thoughtful decisions are essential.</p>
