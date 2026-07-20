@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowDown,
@@ -36,16 +36,34 @@ const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials',
 const backgroundVideo = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4';
 
 function BackgroundVideo() {
+  const [canPlayVideo, setCanPlayVideo] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = navigator as Navigator & { connection?: { saveData?: boolean } };
+    const smallScreen = window.matchMedia('(max-width: 620px)');
+    if (reducedMotion.matches || smallScreen.matches || connection.connection?.saveData) return;
+
+    const startVideo = () => setCanPlayVideo(true);
+    const idleCallback = window.requestIdleCallback?.(startVideo, { timeout: 1500 });
+    const timeout = idleCallback === undefined ? window.setTimeout(startVideo, 800) : undefined;
+
+    return () => {
+      if (idleCallback !== undefined) window.cancelIdleCallback?.(idleCallback);
+      if (timeout !== undefined) window.clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div className="video-bg" aria-hidden="true">
-      <video
+      {canPlayVideo && <video
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         src={backgroundVideo}
-      />
+      />}
     </div>
   );
 }
@@ -154,10 +172,20 @@ function Mark() {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
+
   return (
-    <motion.nav initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="navbar">
+    <motion.nav initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="navbar" aria-label="Primary navigation">
       <Mark />
-      <div className={`nav-links ${open ? 'is-open' : ''}`}>
+      <div id="primary-navigation" className={`nav-links ${open ? 'is-open' : ''}`}>
         {navLinks.map((link) => (
           <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)}>{link}</a>
         ))}
@@ -170,7 +198,7 @@ function Navbar() {
           <Github size={19} />
         </a>
       </div>
-      <button className="mobile-menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>
+      <button className="mobile-menu" type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'} aria-controls="primary-navigation" aria-expanded={open}>
         {open ? <X size={20} /> : <Menu size={20} />}
       </button>
     </motion.nav>
@@ -210,7 +238,7 @@ function Hero() {
       <div className="hero-metrics">
         <div><strong>5+</strong><span>Years across software, data & education</span></div>
         <div><strong>3</strong><span>Domains: commerce, healthcare & operations</span></div>
-        <div><strong>Now</strong><span>Learning AI systems, job hunting & analyzing interesting products</span></div>
+        <div><strong>Now</strong><span>Building AI systems, exploring opportunities & analyzing products</span></div>
       </div>
     </section>
   );
@@ -256,12 +284,12 @@ function Education() {
             <h4>Activities</h4>
             <div className="activity-heading"><strong>Graduate Teaching Assistant</strong></div>
             <p>Graduate Teaching Assistant for the Paul H. Chook Department of Information Systems and Statistics and the Department of Communication Studies.</p>
-            {showTeachingDetails && <div className="activity-details">
+            {showTeachingDetails && <div id="teaching-details" className="activity-details">
               <p>Evaluated and graded Python programming assignments, providing feedback on code quality, logic, and problem-solving approach.</p>
               <p>Supported in-class exams by proctoring sessions, coordinating exam logistics, and ensuring academic integrity.</p>
               <p>Conducted 50+ mock interviews with students to assess career readiness, communication skills, and job interview preparedness.</p>
             </div>}
-            <button className="activity-toggle" type="button" onClick={() => setShowTeachingDetails(!showTeachingDetails)} aria-expanded={showTeachingDetails}>
+            <button className="activity-toggle" type="button" onClick={() => setShowTeachingDetails(!showTeachingDetails)} aria-controls="teaching-details" aria-expanded={showTeachingDetails}>
               {showTeachingDetails ? 'Show less' : 'Show more'}
             </button>
           </div>
@@ -313,8 +341,8 @@ function Experience() {
             <div className="experience-copy">
               <p>{highlightMetrics(item.copy)}</p>
               {item.details && <>
-                {isExpanded && <div className="experience-details">{item.details.map(point => <p key={point}>{highlightMetrics(point)}</p>)}</div>}
-                <button className="activity-toggle" type="button" onClick={() => toggleRole(roleKey)} aria-expanded={isExpanded}>
+                {isExpanded && <div id={`experience-details-${i}`} className="experience-details">{item.details.map(point => <p key={point}>{highlightMetrics(point)}</p>)}</div>}
+                <button className="activity-toggle" type="button" onClick={() => toggleRole(roleKey)} aria-label={`${isExpanded ? 'Show less' : 'Show more'} about ${item.role} at ${item.company}`} aria-controls={`experience-details-${i}`} aria-expanded={isExpanded}>
                   {isExpanded ? 'Show less' : 'Show more'}
                 </button>
               </>}
@@ -504,10 +532,11 @@ function Contact() {
 export default function App() {
   return (
     <div className="site">
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <BackgroundVideo/>
       <div className="bg-overlay"/><div className="rail rail-left"/>
       <svg width="0" height="0" aria-hidden="true"><filter id="c3-noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0"/><feComposite in2="SourceGraphic" operator="in" result="noise"/><feBlend in="SourceGraphic" in2="noise" mode="multiply"/></filter></svg>
-      <div className="page-content"><Navbar/><Hero/><About/><Education/><Experience/><Projects/><Credentials/><Skills/><Contact/></div>
+      <div className="page-content"><Navbar/><main id="main-content"><Hero/><About/><Education/><Experience/><Projects/><Credentials/><Skills/><Contact/></main></div>
     </div>
   );
 }
