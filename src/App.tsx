@@ -4,7 +4,9 @@ import {
   ArrowDown,
   ArrowUpRight,
   Award,
+  BookOpen,
   BriefcaseBusiness,
+  ChevronDown,
   Code2,
   Database,
   ExternalLink,
@@ -412,12 +414,67 @@ function Skills() {
 }
 
 function Credentials() {
+  const [showOlderCredentials, setShowOlderCredentials] = useState(false);
+
+  const currentLearning = [
+    { title: 'AWS Bootcamp: Build AI Apps with AWS Bedrock', issuer: 'Zero To Mastery', detail: 'Generative AI applications with Amazon Bedrock' },
+    { title: 'Ultimate AWS Certified Developer Associate 2026', issuer: 'Udemy', detail: 'DVA-C02 exam preparation' },
+  ];
+
+  const recentCredentials = [
+    { title: 'Foundations of AI Engineering', issuer: 'CodePath', date: 'Spring 2026', detail: 'AI110' },
+    { title: 'Introduction to Python', issuer: 'DataCamp', date: 'Apr 2026', detail: '4 hours', credential: '/credentials/datacamp-introduction-to-python.pdf' },
+    { title: 'Marketing Analytics in Google Sheets', issuer: 'DataCamp', date: 'Mar 2026', detail: '4 hours', credential: '/credentials/datacamp-marketing-analytics-google-sheets.pdf' },
+    { title: 'Intermediate Technical Interview Prep', issuer: 'CodePath', date: 'Fall 2025', detail: 'TIP102' },
+    { title: 'Hierarchical and Recursive Queries in SQL Server', issuer: 'DataCamp', date: 'May 2025', detail: '4 hours', credential: '/credentials/datacamp-hierarchical-recursive-sql.pdf' },
+  ];
+
+  const olderCredentials = [
+    { title: 'Data Manipulation in SQL', issuer: 'DataCamp', date: 'May 2025', detail: '4 hours', credential: '/credentials/datacamp-data-manipulation-sql.pdf' },
+    { title: 'Joining Data in SQL', issuer: 'DataCamp', date: 'May 2025', detail: '4 hours', credential: '/credentials/datacamp-joining-data-sql.pdf' },
+    { title: 'Intermediate SQL', issuer: 'DataCamp', date: 'Mar 2025', detail: '4 hours', credential: '/credentials/datacamp-intermediate-sql.pdf' },
+    { title: 'Python Django Dev to Deployment', issuer: 'Udemy', date: 'Sep 2019', detail: '11 hours', credential: '/credentials/udemy-python-django.pdf' },
+    { title: 'The Complete Node.js Developer Course', issuer: 'Udemy', date: 'Jul 2019', detail: '34.5 hours', credential: '/credentials/udemy-nodejs-developer.pdf' },
+    { title: 'Mobile App Development', issuer: 'CodePath', date: 'Fall 2018', detail: 'Certificate of achievement', credential: '/credentials/codepath-mobile-app-development.pdf' },
+  ];
+
   return (
     <section id="credentials" className="section-shell content-section">
-      <SectionHeading number="05" eyebrow="Credentials" title="Always learning, always sharpening the craft." />
-      <div className="credential-card glass-card">
-        <Award size={34}/><div><span>Certifications & continuing education</span><h3>Cloud, analytics, and modern software delivery</h3><p>Formal certification details are being curated for this portfolio. Current graduate coursework includes data mining, quantitative modeling, web analytics, statistics, and software tools for data analysis.</p></div>
-        <div className="credential-badge">In progress</div>
+      <SectionHeading number="05" eyebrow="Credentials" title="Always learning, always sharpening the craft." copy="Structured programs and focused coursework across AI, cloud, data, and software engineering." />
+
+      <div className="credential-group">
+        <div className="credential-group-heading"><BookOpen size={20}/><div><h3>Current focus</h3></div></div>
+        <div className="credential-grid credential-grid-featured">
+          {currentLearning.map(item => (
+            <article className="credential-item glass-card" key={item.title}>
+              <div className="credential-item-top"><span>{item.issuer}</span><span className="credential-badge">In progress</span></div>
+              <h4>{item.title}</h4><p>{item.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="credential-group">
+        <div className="credential-group-heading"><Award size={20}/><div><span>Certificates of completion</span><h3>Technical coursework</h3></div></div>
+        <div className="credential-grid">
+          {recentCredentials.map(item => (
+            <article className="credential-item glass-card" key={item.title}>
+              <div className="credential-item-top"><span>{item.issuer}</span><span>{item.date}</span></div>
+              <h4>{item.title}</h4>{item.detail && <p>{item.detail}</p>}
+              {item.credential && <a className="credential-link" href={item.credential} target="_blank" rel="noreferrer">View credential <ArrowUpRight size={14}/></a>}
+            </article>
+          ))}
+          {showOlderCredentials && olderCredentials.map(item => (
+            <article className="credential-item glass-card" key={item.title}>
+              <div className="credential-item-top"><span>{item.issuer}</span><span>{item.date}</span></div>
+              <h4>{item.title}</h4><p>{item.detail}</p>
+              <a className="credential-link" href={item.credential} target="_blank" rel="noreferrer">View credential <ArrowUpRight size={14}/></a>
+            </article>
+          ))}
+        </div>
+        <button className="credential-toggle" type="button" aria-expanded={showOlderCredentials} onClick={() => setShowOlderCredentials(current => !current)}>
+          {showOlderCredentials ? 'Show fewer credentials' : 'Show more credentials'} <ChevronDown className={showOlderCredentials ? 'is-open' : ''} size={16}/>
+        </button>
       </div>
     </section>
   );
