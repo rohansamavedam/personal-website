@@ -35,36 +35,6 @@ const navLinks = ['About', 'Education', 'Experience', 'Projects', 'Credentials',
 
 const backgroundVideo = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4';
 
-function GoogleAnalytics() {
-  useEffect(() => {
-    const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim();
-    if (!measurementId) return;
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    document.head.appendChild(script);
-
-    const analyticsWindow = window as typeof window & {
-      dataLayer: unknown[][];
-      gtag: (...args: unknown[]) => void;
-    };
-
-    analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
-    analyticsWindow.gtag = (...args: unknown[]) => analyticsWindow.dataLayer.push(args);
-    analyticsWindow.gtag('js', new Date());
-    analyticsWindow.gtag('config', measurementId, {
-      page_path: window.location.pathname + window.location.search,
-    });
-
-    return () => {
-      script.remove();
-    };
-  }, []);
-
-  return null;
-}
-
 function BackgroundVideo() {
   const [canPlayVideo, setCanPlayVideo] = useState(false);
 
@@ -562,7 +532,6 @@ function Contact() {
 export default function App() {
   return (
     <div className="site">
-      <GoogleAnalytics/>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <BackgroundVideo/>
       <div className="bg-overlay"/><div className="rail rail-left"/>
