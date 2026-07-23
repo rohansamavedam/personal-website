@@ -470,11 +470,12 @@ function Credentials() {
   const [showOlderCredentials, setShowOlderCredentials] = useState(false);
 
   const currentLearning = [
-    { title: 'AWS Bootcamp: Build AI Apps with AWS Bedrock', issuer: 'Zero To Mastery', detail: 'Generative AI applications with Amazon Bedrock' },
+    { title: 'AI Engineering: Building AI Applications', issuer: 'Zero To Mastery', detail: 'LangChain, LLM APIs, LangGraph, and RAG · 18.5 hours', courseUrl: 'https://zerotomastery.io/courses/ai-application-development/' },
     { title: 'Ultimate AWS Certified Developer Associate 2026', issuer: 'Udemy', detail: 'DVA-C02 exam preparation' },
   ];
 
   const recentCredentials = [
+    { title: 'AWS Bootcamp: Build AI Apps with AWS Bedrock', issuer: 'Zero To Mastery', date: 'Jul 2026', detail: '18 hours', credential: '/credentials/aws-bootcamp-build-ai-apps-with-aws-bedrock.pdf' },
     { title: 'Foundations of AI Engineering', issuer: 'CodePath', date: 'Spring 2026', detail: 'AI110' },
     { title: 'Introduction to Python', issuer: 'DataCamp', date: 'Apr 2026', detail: '4 hours', credential: '/credentials/datacamp-introduction-to-python.pdf' },
     { title: 'Marketing Analytics in Google Sheets', issuer: 'DataCamp', date: 'Mar 2026', detail: '4 hours', credential: '/credentials/datacamp-marketing-analytics-google-sheets.pdf' },
@@ -502,6 +503,7 @@ function Credentials() {
             <article className="credential-item glass-card" key={item.title}>
               <div className="credential-item-top"><span>{item.issuer}</span><span className="credential-badge">In progress</span></div>
               <h4>{item.title}</h4><p>{item.detail}</p>
+              {item.courseUrl && <a className="credential-link" href={item.courseUrl} target="_blank" rel="noreferrer">View course <ArrowUpRight size={14}/></a>}
             </article>
           ))}
         </div>
