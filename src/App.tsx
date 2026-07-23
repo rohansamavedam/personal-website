@@ -356,6 +356,8 @@ function Experience() {
 }
 
 function Projects() {
+  const [showMoreProjects, setShowMoreProjects] = useState(false);
+
   return (
     <section id="projects" className="section-shell content-section">
       <SectionHeading number="04" eyebrow="Projects" title="Built to explore real problems." copy="Independent work across responsible AI, creator platforms, mobile development, data systems, and applied analytics." />
@@ -384,12 +386,12 @@ function Projects() {
           <div className="project-feature-footer project-actions"><a href="https://shivakailash.com" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a></div>
         </article>
         <article className="project-mini project-link glass-card">
-          <a className="project-card-primary" href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer" aria-label="View the TravSafe project on GitHub" />
-          <span>Mobile app · 2021</span>
-          <h3>TravSafe</h3>
-          <p>A React Native travel-safety app that brings destination advisories, COVID-19 trends, weather, local news, and search history into one mobile experience.</p>
-          <div className="tags"><span>React Native</span><span>Expo</span><span>AWS Amplify</span><span>REST APIs</span></div>
-          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/nova-sonic-speech-to-speech-ai-travel-agent" target="_blank" rel="noreferrer" aria-label="View the Nova Sonic Speech-to-Speech AI Hotel Agent project on GitHub" />
+          <span>Voice AI agent · Jul 2026</span>
+          <h3>Real-Time Speech-to-Speech AI Hotel Agent with Amazon Bedrock Nova Sonic</h3>
+          <p>Built a real-time, interruptible speech-to-speech hotel agent using Amazon Nova Sonic on Amazon Bedrock, Python, asyncio, and PyAudio. Implemented asynchronous DynamoDB tool calls to verify guests, retrieve reservations, and update room types or special requests during live conversations.</p>
+          <div className="tags"><span>Amazon Bedrock</span><span>Nova Sonic</span><span>Python</span><span>asyncio</span><span>PyAudio</span><span>DynamoDB</span></div>
+          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/nova-sonic-speech-to-speech-ai-travel-agent" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
         </article>
         <article className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://github.com/rohansamavedam/CIS-9340-TERM-PROJECT" target="_blank" rel="noreferrer" aria-label="View the MySQL Property Management Database System project on GitHub" />
@@ -400,6 +402,16 @@ function Projects() {
           <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9340-TERM-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
         </article>
         <article className="project-mini project-link project-mini-wide glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer" aria-label="View the TravSafe project on GitHub" />
+          <span>Mobile app · 2021</span>
+          <h3>TravSafe</h3>
+          <p>A React Native travel-safety app that brings destination advisories, COVID-19 trends, weather, local news, and search history into one mobile experience.</p>
+          <div className="tags"><span>React Native</span><span>Expo</span><span>AWS Amplify</span><span>REST APIs</span></div>
+          <div className="mini-footer project-actions">
+            <a href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
+          </div>
+        </article>
+        <article className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://rohansamavedam.github.io/STA9750-2025-FALL/" target="_blank" rel="noreferrer" aria-label="View the R and Quarto Data Analytics portfolio live site" />
           <span>Analytics portfolio · 2025</span>
           <h3>R / Quarto Data Analytics</h3>
@@ -410,14 +422,18 @@ function Projects() {
             <a href="https://github.com/rohansamavedam/STA9750-2025-FALL" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
           </div>
         </article>
-        <article className="project-mini project-link glass-card">
+        {showMoreProjects && <article id="more-projects" className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer" aria-label="View the NYC Motor Vehicle Collision Fatality Analysis project on GitHub" />
           <span>Data mining · 2025</span>
           <h3>NYC Collision Fatality Analysis</h3>
           <p>A Python data-mining study using feature engineering and logistic regression to test whether Ford vehicles were associated with higher fatal-crash odds in NYC collision records.</p>
           <div className="tags"><span>Python</span><span>Pandas</span><span>scikit-learn</span><span>statsmodels</span><span>Logistic Regression</span></div>
           <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
-        </article>
+        </article>}
+        <button className="projects-toggle" type="button" onClick={() => setShowMoreProjects(!showMoreProjects)} aria-expanded={showMoreProjects} aria-controls="more-projects">
+          {showMoreProjects ? 'Show fewer projects' : 'Show more projects'}
+          <ChevronDown size={16} className={showMoreProjects ? 'is-open' : ''} aria-hidden="true" />
+        </button>
       </div>
     </section>
   );
