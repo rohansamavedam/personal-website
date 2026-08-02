@@ -356,8 +356,6 @@ function Experience() {
 }
 
 function Projects() {
-  const [showMoreProjects, setShowMoreProjects] = useState(false);
-
   return (
     <section id="projects" className="section-shell content-section">
       <SectionHeading number="04" eyebrow="Projects" title="Built to explore real problems." copy="Independent work across responsible AI, creator platforms, mobile development, data systems, and applied analytics." />
@@ -375,15 +373,13 @@ function Projects() {
             <a href="https://github.com/rohansamavedam/examination-ai" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
           </div>
         </article>
-        <article className="project-feature project-link glass-card">
-          <a className="project-card-primary" href="https://shivakailash.com" target="_blank" rel="noreferrer" aria-label="Visit Shivakailash.com" />
-          <div className="project-top"><span>Freelance project · Jan 2025—Jan 2026</span></div>
-          <div className="project-feature-intro">
-            <h3>Shivakailash.com</h3>
-            <p>Products, courses, and events for a creator with 20K YouTube subscribers.</p>
-          </div>
-          <div className="project-details"><div><h3>A secure creator business, built end to end.</h3><p>Led full-cycle development of a serverless commerce and learning platform with digital product sales, Stripe payments, Cal.com scheduling, 2FA dashboards, and GA4-informed user flows. Protected paid course content through authenticated sessions, role-based permissions, and time-limited media URLs.</p></div><div className="tags"><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>AWS</span><span>Stripe</span><span>GA4</span></div></div>
-          <div className="project-feature-footer project-actions"><a href="https://shivakailash.com" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a></div>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/shivakailash-fe" target="_blank" rel="noreferrer" aria-label="View the Full-Stack Serverless Commerce and Courses Platform project on GitHub" />
+          <span>Freelance project · Jan 2025—Jan 2026</span>
+          <h3>Full-Stack Serverless Commerce &amp; Courses Platform</h3>
+          <p>Led full-cycle development of a serverless commerce and learning platform with digital product sales, Stripe payments, Cal.com scheduling, 2FA dashboards, GA4-informed user flows, and protected course content.</p>
+          <div className="tags"><span>Next.js</span><span>TypeScript</span><span>Node.js</span><span>AWS</span><span>Stripe</span><span>GA4</span></div>
+          <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/shivakailash-fe" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
         </article>
         <article className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://github.com/rohansamavedam/nova-sonic-speech-to-speech-ai-travel-agent" target="_blank" rel="noreferrer" aria-label="View the Nova Sonic Speech-to-Speech AI Hotel Agent project on GitHub" />
@@ -401,7 +397,7 @@ function Projects() {
           <div className="tags"><span>MySQL</span><span>Workbench</span><span>ER Modeling</span><span>Retool</span></div>
           <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9340-TERM-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
         </article>
-        <article className="project-mini project-link project-mini-wide glass-card">
+        <article className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://github.com/rohansamavedam/TravSafe" target="_blank" rel="noreferrer" aria-label="View the TravSafe project on GitHub" />
           <span>Mobile app · 2021</span>
           <h3>TravSafe</h3>
@@ -422,18 +418,14 @@ function Projects() {
             <a href="https://github.com/rohansamavedam/STA9750-2025-FALL" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
           </div>
         </article>
-        {showMoreProjects && <article id="more-projects" className="project-mini project-link glass-card">
+        <article className="project-mini project-link glass-card">
           <a className="project-card-primary" href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer" aria-label="View the NYC Motor Vehicle Collision Fatality Analysis project on GitHub" />
           <span>Data mining · 2025</span>
           <h3>NYC Collision Fatality Analysis</h3>
           <p>A Python data-mining study using feature engineering and logistic regression to test whether Ford vehicles were associated with higher fatal-crash odds in NYC collision records.</p>
           <div className="tags"><span>Python</span><span>Pandas</span><span>scikit-learn</span><span>statsmodels</span><span>Logistic Regression</span></div>
           <div className="mini-footer project-actions"><a href="https://github.com/rohansamavedam/CIS-9660-GROUP-PROJECT" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a></div>
-        </article>}
-        <button className="projects-toggle" type="button" onClick={() => setShowMoreProjects(!showMoreProjects)} aria-expanded={showMoreProjects} aria-controls="more-projects">
-          {showMoreProjects ? 'Show fewer projects' : 'Show more projects'}
-          <ChevronDown size={16} className={showMoreProjects ? 'is-open' : ''} aria-hidden="true" />
-        </button>
+        </article>
       </div>
     </section>
   );
