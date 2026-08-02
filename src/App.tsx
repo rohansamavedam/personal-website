@@ -462,7 +462,7 @@ function Credentials() {
   const [showOlderCredentials, setShowOlderCredentials] = useState(false);
 
   const currentLearning = [
-    { title: 'AI Engineering: Building AI Applications', issuer: 'Zero To Mastery', detail: 'LangChain, LLM APIs, LangGraph, and RAG · 18.5 hours', courseUrl: 'https://zerotomastery.io/courses/ai-application-development/' },
+    { title: 'AI Engineer Production Track: Deploy LLMs & Agents at Scale', issuer: 'Udemy', courseUrl: 'https://www.udemy.com/course/generative-and-agentic-ai-in-production/' },
     { title: 'Ultimate AWS Certified Developer Associate 2026', issuer: 'Udemy', detail: 'DVA-C02 exam preparation' },
   ];
 
@@ -494,7 +494,7 @@ function Credentials() {
           {currentLearning.map(item => (
             <article className="credential-item glass-card" key={item.title}>
               <div className="credential-item-top"><span>{item.issuer}</span><span className="credential-badge">In progress</span></div>
-              <h4>{item.title}</h4><p>{item.detail}</p>
+              <h4>{item.title}</h4>{item.detail && <p>{item.detail}</p>}
               {item.courseUrl && <a className="credential-link" href={item.courseUrl} target="_blank" rel="noreferrer">View course <ArrowUpRight size={14}/></a>}
             </article>
           ))}
