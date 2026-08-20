@@ -360,15 +360,24 @@ function Projects() {
     <section id="projects" className="section-shell content-section">
       <SectionHeading number="04" eyebrow="Projects" title="Built to explore real problems." copy="Independent work across responsible AI, creator platforms, mobile development, data systems, and applied analytics." />
       <div className="projects-grid">
-        <article className="project-feature project-link glass-card">
-          <a className="project-card-primary" href="https://examination-ai.netlify.app/" target="_blank" rel="noreferrer" aria-label="Visit the Examination AI live site" />
-          <div className="project-top"><span>Open-source product · Jul 2026</span><span className="project-status">In progress</span></div>
-          <div className="project-feature-intro">
-            <h3>Examination AI</h3>
-            <p>Responsible AI assistance for university exams, controlled by professors.</p>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://github.com/rohansamavedam/llm_computer_use_automation" target="_blank" rel="noreferrer" aria-label="View the LLM Computer-Use Automation System project on GitHub" />
+          <span>Computer-use automation · Aug 2026</span>
+          <h3>LLM Computer-Use Automation System</h3>
+          <p>Built an LLM-guided system that discovers workflows in a UI-only legacy app, converts successful traces into validated capability artifacts, and replays them deterministically with zero LLM calls. Added safety guardrails, typed error handling, bounded recovery, evidence capture, and same-session human handoff.</p>
+          <div className="tags"><span>Python</span><span>Playwright</span><span>OpenAI API</span><span>Pydantic</span><span>LLMs</span><span>Computer Use</span></div>
+          <div className="mini-footer project-actions">
+            <a href="https://drive.google.com/file/d/1wxBy5WS9iu5CEEaCZDQJWpJ8FxTdUn1F/view?usp=sharing" target="_blank" rel="noreferrer">View demo <ExternalLink size={15}/></a>
+            <a href="https://github.com/rohansamavedam/llm_computer_use_automation" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
           </div>
-          <div className="project-details"><div><h3>A controlled middle ground for AI-assisted assessment.</h3><p>Designed and built a product concept and case study where professors configure question-level AI access, prompt budgets, and guidance-only guardrails. The experience gives students limited learning support while logging interactions for transparent review and assessment analytics.</p></div><div className="tags"><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>LLMs</span><span>Prompt Engineering</span><span>AI Guardrails</span><span>Responsible AI</span><span>Product Analytics</span></div></div>
-          <div className="project-feature-footer project-actions">
+        </article>
+        <article className="project-mini project-link glass-card">
+          <a className="project-card-primary" href="https://examination-ai.netlify.app/" target="_blank" rel="noreferrer" aria-label="Visit the Examination AI live site" />
+          <span>Open-source product · Jul 2026 · In progress</span>
+          <h3>Examination AI</h3>
+          <p>Designed and built a responsible AI assessment product where professors configure question-level AI access, prompt budgets, and guidance-only guardrails. Students get limited learning support while interactions are logged for transparent review and assessment analytics.</p>
+          <div className="tags"><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>LLMs</span><span>AI Guardrails</span><span>Product Analytics</span></div>
+          <div className="mini-footer project-actions">
             <a href="https://examination-ai.netlify.app/" target="_blank" rel="noreferrer">View live site <ExternalLink size={15}/></a>
             <a href="https://github.com/rohansamavedam/examination-ai" target="_blank" rel="noreferrer">View on GitHub <Github size={15}/></a>
           </div>
