@@ -249,7 +249,7 @@ function About() {
     <section id="about" className="section-shell content-section">
       <SectionHeading number="01" eyebrow="About" title="Engineer by practice. Problem-solver by nature." />
       <div className="about-grid">
-        <div className="portrait-card glass-card"><img src="/images/rohan-profile.png" alt="Rohan Samavedam" loading="lazy" decoding="async" /></div>
+        <div className="portrait-card glass-card"><img src="/images/rohan-profile.jpg" alt="Rohan Samavedam" loading="lazy" decoding="async" /></div>
         <div className="about-copy">
           <h3>Professional motivation</h3>
           <p>I’m interested in building software that shapes how people and organizations operate. My experience spans fulfillment, consumer products, and healthcare, where reliable systems, trustworthy data, and thoughtful decisions are essential.</p>
