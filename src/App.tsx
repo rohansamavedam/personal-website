@@ -222,24 +222,19 @@ function Hero() {
   return (
     <section id="top" className="hero section-shell">
       <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="hero-kicker">
-        <span className="status-dot" /> Brooklyn, New York · Open to work
+        <span className="status-dot" /> New York City · Open to Software Engineering, AI Engineering & Forward-Deployed Engineering roles
       </motion.div>
       <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }}>
-        I build software<br />for decisions that<br />
-        <span className="animate-shiny" style={gradientStyle}>matter in the real world.</span>
+        I build dependable<br />software for complex,<br />
+        <span className="animate-shiny" style={gradientStyle}>real-world systems.</span>
       </motion.h1>
       <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55 }} className="hero-bottom">
-        <p>I’m <strong>Rohan Samavedam</strong>, a software engineer and business analytics graduate student. I build production systems that turn complex data and operational problems into clear, dependable products.</p>
+        <p>I’m <strong>Rohan Samavedam</strong>, a software engineer with experience building production systems at Amazon and One Medical. My background in computer science, combined with graduate training in business analytics, allows me to approach engineering challenges with both technical rigor and a strong understanding of product, data, and business impact.</p>
         <div className="hero-actions">
           <a href="#experience" className="pill-button">Explore my work <ArrowDown size={15} /></a>
           <a href="#contact" className="pill-button pill-button-outline">Get in touch</a>
         </div>
       </motion.div>
-      <div className="hero-metrics">
-        <div><strong>5+</strong><span>Years across software, data & education</span></div>
-        <div><strong>3</strong><span>Domains: commerce, healthcare & operations</span></div>
-        <div><strong>Now</strong><span>Building AI systems, exploring opportunities & analyzing products</span></div>
-      </div>
     </section>
   );
 }
@@ -252,9 +247,9 @@ function About() {
         <div className="portrait-card glass-card"><img src="/images/rohan-profile.jpg" alt="Rohan Samavedam" loading="lazy" decoding="async" /></div>
         <div className="about-copy">
           <h3>Professional motivation</h3>
-          <p>I’m interested in building software that shapes how people and organizations operate. My experience spans fulfillment, consumer products, and healthcare, where reliable systems, trustworthy data, and thoughtful decisions are essential.</p>
-          <h3>Personal operating philosophy</h3>
-          <p>Outside engineering, I’m a student of meditation, yoga, psychology, and philosophy. Those practices shape how I work: staying composed under pressure, communicating with honesty and tact, and thinking clearly when the problem is ambiguous.</p>
+          <p>I enjoy designing and building reliable, scalable software that improves user experience and supports measurable outcomes. My experience has involved working across full-stack systems, collaborating with cross-functional teams, and delivering solutions that connect technical execution with real business value.</p>
+          <h3>Perspective</h3>
+          <p>Outside engineering, I’m a student of yoga and philosophy. This pursuit shapes how I work: communicating with honesty and tact, staying composed under pressure, thinking clearly through ambiguity, and collaborating effectively with people from different backgrounds and perspectives.</p>
         </div>
       </div>
     </section>
